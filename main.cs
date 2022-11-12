@@ -62,7 +62,13 @@ namespace FoolishDonkeyUniversalis
             // System.Console.ReadLine();
             using (ResXResourceSet resxSet = new ResXResourceSet(imgsResourceFile)){
                 this.imageList1.Images.Add((Image)resxSet.GetObject("CelestialEmporerCrown.png"));
+                this.imageList1.Images.Add((Image)resxSet.GetObject("CelestialEmporerCrownSelected.png"));
+                this.imageList1.Images.Add((Image)resxSet.GetObject("KingsCrown.png"));
+                this.imageList1.Images.Add((Image)resxSet.GetObject("KingsCrownSelected.png"));
                 this.imageList1.Images.SetKeyName(0, "CelestialEmporerCrown");
+                this.imageList1.Images.SetKeyName(1, "CelestialEmporerCrownSelected");
+                this.imageList1.Images.SetKeyName(2, "KingsCrown");
+                this.imageList1.Images.SetKeyName(3, "KingsCrownSelected");
             }
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
 
@@ -130,16 +136,42 @@ namespace FoolishDonkeyUniversalis
             TreeNode newNode = new TreeNode("新命名空间", 0, 1);
             this.treeView1.Nodes.Add(newNode);
             this.treeView1.Select();
-            // this.textBox1.Text = "";	//提示输入信息
-            // textBox1.Text = "请输入专业";
-            // textBox1.ForeColor = Color.LightGray;
-            // textboxHasText = false;
         }
         private void AddEventBtnClick(object sender, EventArgs e)
         {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            Console.WriteLine("[MainWindow] AddEventBtnClick: selectedNode.Name = {0}",selectedNode.Name);
+            Console.WriteLine("[MainWindow] AddEventBtnClick: selectedNode.Level = {0}",selectedNode.Level);
+            if (selectedNode == null){
+                MessageBox.Show("请先选中一个命名空间", "提示信息");
+                return;
+            }
+            if (selectedNode.Level == 0){
+                TreeNode newNode = new TreeNode("新事件", 2, 3);
+                selectedNode.Nodes.Add(newNode);
+                selectedNode.Expand();
+                this.treeView1.Select();
+            }else if(selectedNode.Level == 1){
+                TreeNode newNode = new TreeNode("新事件", 2, 3);
+                selectedNode.Parent.Nodes.Add(newNode);
+                selectedNode.Parent.Expand();
+                this.treeView1.Select();
+            }
         }
         private void DelNodeBtnClick(object sender, EventArgs e)
         {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("删除子节点前先选中一个节点", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (Parent == null)
+                this.treeView1.Nodes.Remove(selectedNode);
+            else
+                parentNode.Nodes.Remove(selectedNode);
+            this.treeView1.Select();
         }
     }
     static class Boot{
