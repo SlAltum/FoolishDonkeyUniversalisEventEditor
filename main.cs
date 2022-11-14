@@ -32,6 +32,8 @@ namespace FoolishDonkeyUniversalis
             this.addEventBtn = new System.Windows.Forms.Button();
             this.delNodeBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
+            this.compileBtn = new System.Windows.Forms.Button();
+            this.overviewBtn = new System.Windows.Forms.Button();
             this.namespaceNameLabel = new System.Windows.Forms.Label();
             this.namespaceName = new System.Windows.Forms.TextBox();
             this.eventTitleLabel = new System.Windows.Forms.Label();
@@ -48,8 +50,27 @@ namespace FoolishDonkeyUniversalis
             this.eventTrigger = new System.Windows.Forms.TextBox();
             this.triggeredOnlyLabel = new System.Windows.Forms.Label();
             this.triggeredOnly = new System.Windows.Forms.CheckBox();
+            this.fireOnlyOnceLabel = new System.Windows.Forms.Label();
+            this.fireOnlyOnce = new System.Windows.Forms.CheckBox();
             this.mtthLabel = new System.Windows.Forms.Label();
             this.mtth = new System.Windows.Forms.TextBox();
+            this.eventPictureLabel = new System.Windows.Forms.Label();
+            this.eventPicture = new System.Windows.Forms.TextBox();
+            this.immediateLabel = new System.Windows.Forms.Label();
+            this.immediate = new System.Windows.Forms.TextBox();
+            this.optionLabel = new System.Windows.Forms.Label();
+            this.prevOptionBtn = new System.Windows.Forms.Button();
+            this.nextOptionBtn = new System.Windows.Forms.Button();
+            this.newOptionBtn = new System.Windows.Forms.Button();
+            this.delOptionBtn = new System.Windows.Forms.Button();
+            this.optionNameLabel = new System.Windows.Forms.Label();
+            this.optionName = new System.Windows.Forms.TextBox();
+            this.optionTriggerLabel = new System.Windows.Forms.Label();
+            this.optionTrigger = new System.Windows.Forms.TextBox();
+            this.optionEffectLabel = new System.Windows.Forms.Label();
+            this.optionEffect = new System.Windows.Forms.TextBox();
+            this.highlightLabel = new System.Windows.Forms.Label();
+            this.highlight = new System.Windows.Forms.CheckBox();
 
             this.SuspendLayout();
 
@@ -75,7 +96,7 @@ namespace FoolishDonkeyUniversalis
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(256, 450);
             this.treeView1.TabIndex = 0;
-            this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.OnNodeMouseClick); 
+            this.treeView1.AfterSelect += new TreeViewEventHandler(this.TreeViewAfterSelect); 
             // 
             // imageList1
             // 
@@ -134,11 +155,31 @@ namespace FoolishDonkeyUniversalis
             this.saveBtn.Click += new System.EventHandler(this.Save);
 
             // 
+            // compileBtn
+            // 
+            this.compileBtn.Location = new System.Drawing.Point(880, 438);
+            this.compileBtn.Name = "compileBtn";
+            this.compileBtn.Size = new System.Drawing.Size(80, 36);
+            this.compileBtn.Text = "编译";
+            this.compileBtn.UseVisualStyleBackColor = true;
+            this.compileBtn.Click += new System.EventHandler(this.Compile);
+
+            // 
+            // overviewBtn
+            // 
+            this.overviewBtn.Location = new System.Drawing.Point(880, 0);
+            this.overviewBtn.Name = "overviewBtn";
+            this.overviewBtn.Size = new System.Drawing.Size(80, 36);
+            this.overviewBtn.Text = "预览";
+            this.overviewBtn.UseVisualStyleBackColor = true;
+            this.overviewBtn.Click += new System.EventHandler(this.Overview);
+
+            // 
             // namespaceNameLabel
             // 
             this.namespaceNameLabel.Location = new System.Drawing.Point(260, 4);
             this.namespaceNameLabel.Name = "namespaceNameLabel";
-            this.namespaceNameLabel.Size = new System.Drawing.Size(72, 12);
+            this.namespaceNameLabel.Size = new System.Drawing.Size(68, 12);
             this.namespaceNameLabel.Text = "命名空间：";
 
             // 
@@ -157,7 +198,7 @@ namespace FoolishDonkeyUniversalis
             // 
             this.eventTitleLabel.Location = new System.Drawing.Point(260, 24);
             this.eventTitleLabel.Name = "eventTitleLabel";
-            this.eventTitleLabel.Size = new System.Drawing.Size(72, 12);
+            this.eventTitleLabel.Size = new System.Drawing.Size(68, 12);
             this.eventTitleLabel.Text = "事件名称：";
 
             // 
@@ -176,7 +217,7 @@ namespace FoolishDonkeyUniversalis
             // 
             this.eventDescLabel.Location = new System.Drawing.Point(260, 44);
             this.eventDescLabel.Name = "eventDescLabel";
-            this.eventDescLabel.Size = new System.Drawing.Size(72, 12);
+            this.eventDescLabel.Size = new System.Drawing.Size(68, 12);
             this.eventDescLabel.Text = "事件描述：";
 
             // 
@@ -247,7 +288,7 @@ namespace FoolishDonkeyUniversalis
             // 
             this.eventTriggerLabel.Location = new System.Drawing.Point(260, 218);
             this.eventTriggerLabel.Name = "eventTriggerLabel";
-            this.eventTriggerLabel.Size = new System.Drawing.Size(72, 12);
+            this.eventTriggerLabel.Size = new System.Drawing.Size(68, 12);
             this.eventTriggerLabel.Text = "触发条件：";
 
             // 
@@ -280,23 +321,208 @@ namespace FoolishDonkeyUniversalis
             this.triggeredOnly.CheckedChanged += new System.EventHandler(this.TriggeredOnlyCheckedChanged);
             
             // 
+            // fireOnlyOnceLabel
+            // 
+            this.fireOnlyOnceLabel.Location = new System.Drawing.Point(260, 408);
+            this.fireOnlyOnceLabel.Name = "fireOnlyOnceLabel";
+            this.fireOnlyOnceLabel.Size = new System.Drawing.Size(68, 12);
+            this.fireOnlyOnceLabel.Text = "只触发一次";
+
+            // 
+            // fireOnlyOnce
+            // 
+            this.fireOnlyOnce.Location = new System.Drawing.Point(328, 404);
+            this.fireOnlyOnce.Name = "fireOnlyOnce";
+            this.fireOnlyOnce.Size = new System.Drawing.Size(20, 20);
+            this.fireOnlyOnce.Checked = false;
+            this.fireOnlyOnce.CheckedChanged += new System.EventHandler(this.FireOnlyOnceCheckedChanged);
+            
+            // 
             // mtthLabel
             // 
             this.mtthLabel.Location = new System.Drawing.Point(380, 368);
-            this.mtthLabel.Name = "triggeredOnlyLabel";
+            this.mtthLabel.Name = "mtthLabel";
             this.mtthLabel.Size = new System.Drawing.Size(48, 12);
             this.mtthLabel.Text = "mtth：";
+            this.mtth.Enabled = false;
 
             // 
             // mtth
             // 
             this.mtth.Font = new System.Drawing.Font("宋体", 8.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mtth.Location = new System.Drawing.Point(430, 364);
-            this.mtth.Name = "eventTitle";
+            this.mtth.Name = "mtth";
             this.mtth.Size = new System.Drawing.Size(80, 12);
             this.mtth.Text = "请输入mtth";
             this.mtth.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtth.TextChanged += new System.EventHandler(this.MtthTextChanged);
+
+            // 
+            // eventPictureLabel
+            // 
+            this.eventPictureLabel.Location = new System.Drawing.Point(260, 388);
+            this.eventPictureLabel.Name = "eventPictureLabel";
+            this.eventPictureLabel.Size = new System.Drawing.Size(68, 12);
+            this.eventPictureLabel.Text = "事件图片：";
+
+            // 
+            // eventPicture
+            // 
+            this.eventPicture.Font = new System.Drawing.Font("宋体", 8.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.eventPicture.Location = new System.Drawing.Point(328, 384);
+            this.eventPicture.Name = "eventPicture";
+            this.eventPicture.Size = new System.Drawing.Size(200, 12);
+            this.eventPicture.Text = "请输入图片名";
+            this.eventPicture.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.eventPicture.TextChanged += new System.EventHandler(this.EventPictureTextChanged);
+
+            // 
+            // immediateLabel
+            // 
+            this.immediateLabel.Location = new System.Drawing.Point(530, 4);
+            this.immediateLabel.Name = "immediateLabel";
+            this.immediateLabel.Size = new System.Drawing.Size(68, 12);
+            this.immediateLabel.Text = "立即效果：";
+
+            // 
+            // immediate
+            // 
+            this.immediate.Font = new System.Drawing.Font("宋体", 8.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.immediate.Location = new System.Drawing.Point(598, 0);
+            this.immediate.Name = "immediate";
+            this.immediate.Multiline = true;
+            this.immediate.Size = new System.Drawing.Size(200, 150);
+            this.immediate.Text = "请输入立即效果";
+            this.immediate.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.immediate.TextChanged += new System.EventHandler(this.ImmediateTextChanged);
+            
+            // 
+            // optionLabel
+            // 
+            this.optionLabel.Location = new System.Drawing.Point(530, 154);
+            this.optionLabel.Name = "optionLabel";
+            this.optionLabel.Size = new System.Drawing.Size(100, 12);
+            this.optionLabel.Text = "选项1/共1个";
+
+            // 
+            // prevOptionBtn
+            // 
+            this.prevOptionBtn.Location = new System.Drawing.Point(632, 150);
+            this.prevOptionBtn.Name = "prevOptionBtn";
+            this.prevOptionBtn.Size = new System.Drawing.Size(20, 20);
+            this.prevOptionBtn.Text = "<";
+            this.prevOptionBtn.UseVisualStyleBackColor = true;
+            this.prevOptionBtn.Click += new System.EventHandler(this.PrevOption);
+            this.prevOptionBtn.Enabled = false;
+
+            // 
+            // nextOptionBtn
+            // 
+            this.nextOptionBtn.Location = new System.Drawing.Point(654, 150);
+            this.nextOptionBtn.Name = "prevOptionBtn";
+            this.nextOptionBtn.Size = new System.Drawing.Size(20, 20);
+            this.nextOptionBtn.Text = ">";
+            this.nextOptionBtn.UseVisualStyleBackColor = true;
+            this.nextOptionBtn.Click += new System.EventHandler(this.NextOption);
+            this.nextOptionBtn.Enabled = false;
+
+            // 
+            // newOptionBtn
+            // 
+            this.newOptionBtn.Location = new System.Drawing.Point(680, 150);
+            this.newOptionBtn.Name = "newOptionBtn";
+            this.newOptionBtn.Size = new System.Drawing.Size(50, 20);
+            this.newOptionBtn.Text = "添加";
+            this.newOptionBtn.UseVisualStyleBackColor = true;
+            this.newOptionBtn.Click += new System.EventHandler(this.NewOption);
+
+            // 
+            // delOptionBtn
+            // 
+            this.delOptionBtn.Location = new System.Drawing.Point(732, 150);
+            this.delOptionBtn.Name = "delOptionBtn";
+            this.delOptionBtn.Size = new System.Drawing.Size(50, 20);
+            this.delOptionBtn.Text = "删除";
+            this.delOptionBtn.UseVisualStyleBackColor = true;
+            this.delOptionBtn.Click += new System.EventHandler(this.DelOption);
+            this.delOptionBtn.Enabled = false;
+            
+            // 
+            // optionNameLabel
+            // 
+            this.optionNameLabel.Location = new System.Drawing.Point(530, 174);
+            this.optionNameLabel.Name = "optionNameLabel";
+            this.optionNameLabel.Size = new System.Drawing.Size(68, 12);
+            this.optionNameLabel.Text = "选项名称：";
+
+            // 
+            // optionName
+            // 
+            this.optionName.Font = new System.Drawing.Font("宋体", 8.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.optionName.Location = new System.Drawing.Point(598, 170);
+            this.optionName.Name = "optionName";
+            this.optionName.Multiline = false;
+            this.optionName.Size = new System.Drawing.Size(200, 20);
+            this.optionName.Text = "请输入选项";
+            this.optionName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.optionName.TextChanged += new System.EventHandler(this.OptionNameTextChanged);
+            
+            // 
+            // highlightLabel
+            // 
+            this.highlightLabel.Location = new System.Drawing.Point(822, 174);
+            this.highlightLabel.Name = "highlightLabel";
+            this.highlightLabel.Size = new System.Drawing.Size(30, 12);
+            this.highlightLabel.Text = "高亮";
+
+            // 
+            // highlight
+            // 
+            this.highlight.Location = new System.Drawing.Point(800, 170);
+            this.highlight.Name = "highlight";
+            this.highlight.Size = new System.Drawing.Size(20, 20);
+            this.highlight.Checked = false;
+            this.highlight.CheckedChanged += new System.EventHandler(this.HighlightCheckedChanged);
+            
+            // 
+            // optionTriggerLabel
+            // 
+            this.optionTriggerLabel.Location = new System.Drawing.Point(530, 194);
+            this.optionTriggerLabel.Name = "optionTriggerLabel";
+            this.optionTriggerLabel.Size = new System.Drawing.Size(68, 12);
+            this.optionTriggerLabel.Text = "选项触发：";
+
+            // 
+            // optionTrigger
+            // 
+            this.optionTrigger.Font = new System.Drawing.Font("宋体", 8.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.optionTrigger.Location = new System.Drawing.Point(598, 190);
+            this.optionTrigger.Name = "optionTrigger";
+            this.optionTrigger.Multiline = true;
+            this.optionTrigger.Size = new System.Drawing.Size(200, 150);
+            this.optionTrigger.Text = "请输入触发条件";
+            this.optionTrigger.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.optionTrigger.TextChanged += new System.EventHandler(this.OptionTriggerTextChanged);
+            
+            // 
+            // optionEffectLabel
+            // 
+            this.optionEffectLabel.Location = new System.Drawing.Point(530, 344);
+            this.optionEffectLabel.Name = "optionEffectLabel";
+            this.optionEffectLabel.Size = new System.Drawing.Size(68, 12);
+            this.optionEffectLabel.Text = "选项效果：";
+
+            // 
+            // optionEffect
+            // 
+            this.optionEffect.Font = new System.Drawing.Font("宋体", 8.0F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.optionEffect.Location = new System.Drawing.Point(598, 340);
+            this.optionEffect.Name = "optionEffect";
+            this.optionEffect.Multiline = true;
+            this.optionEffect.Size = new System.Drawing.Size(200, 150);
+            this.optionEffect.Text = "请输入选择后效果";
+            this.optionEffect.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.optionEffect.TextChanged += new System.EventHandler(this.OptionEffectTextChanged);
 
             // autoLoad
             this.Load += new System.EventHandler(this.FromLoad);
@@ -311,6 +537,8 @@ namespace FoolishDonkeyUniversalis
             this.Controls.Add(this.addEventBtn);
             this.Controls.Add(this.delNodeBtn);
             this.Controls.Add(this.saveBtn);
+            this.Controls.Add(this.compileBtn);
+            this.Controls.Add(this.overviewBtn);
             this.Controls.Add(this.namespaceNameLabel);
             this.Controls.Add(this.namespaceName);
             this.Controls.Add(this.eventTitleLabel);
@@ -327,8 +555,27 @@ namespace FoolishDonkeyUniversalis
             this.Controls.Add(this.eventTrigger);
             this.Controls.Add(this.triggeredOnlyLabel);
             this.Controls.Add(this.triggeredOnly);
+            this.Controls.Add(this.fireOnlyOnceLabel);
+            this.Controls.Add(this.fireOnlyOnce);
             this.Controls.Add(this.mtthLabel);
             this.Controls.Add(this.mtth);
+            this.Controls.Add(this.eventPictureLabel);
+            this.Controls.Add(this.eventPicture);
+            this.Controls.Add(this.immediateLabel);
+            this.Controls.Add(this.immediate);
+            this.Controls.Add(this.optionLabel);
+            this.Controls.Add(this.prevOptionBtn);
+            this.Controls.Add(this.nextOptionBtn);
+            this.Controls.Add(this.newOptionBtn);
+            this.Controls.Add(this.delOptionBtn);
+            this.Controls.Add(this.optionNameLabel);
+            this.Controls.Add(this.optionName);
+            this.Controls.Add(this.optionTriggerLabel);
+            this.Controls.Add(this.optionTrigger);
+            this.Controls.Add(this.optionEffectLabel);
+            this.Controls.Add(this.optionEffect);
+            this.Controls.Add(this.highlightLabel);
+            this.Controls.Add(this.highlight);
 
             // 禁用tab
             this.label1.TabStop = false;
@@ -337,6 +584,8 @@ namespace FoolishDonkeyUniversalis
             this.addEventBtn.TabStop = false;
             this.delNodeBtn.TabStop = false;
             this.saveBtn.TabStop = false;
+            this.compileBtn.TabStop = false;
+            this.overviewBtn.TabStop = false;
             this.namespaceNameLabel.TabStop = false;
             this.namespaceName.TabStop = false;
             this.eventTitleLabel.TabStop = false;
@@ -352,8 +601,27 @@ namespace FoolishDonkeyUniversalis
             this.eventTrigger.TabStop = false;
             this.triggeredOnlyLabel.TabStop = false;
             this.triggeredOnly.TabStop = false;
+            this.fireOnlyOnceLabel.TabStop = false;
+            this.fireOnlyOnce.TabStop = false;
             this.mtthLabel.TabStop = false;
             this.mtth.TabStop = false;
+            this.eventPictureLabel.TabStop = false;
+            this.eventPicture.TabStop = false;
+            this.immediateLabel.TabStop = false;
+            this.immediate.TabStop = false;
+            this.optionLabel.TabStop = false;
+            this.prevOptionBtn.TabStop = false;
+            this.nextOptionBtn.TabStop = false;
+            this.newOptionBtn.TabStop = false;
+            this.delOptionBtn.TabStop = false;
+            this.optionNameLabel.TabStop = false;
+            this.optionName.TabStop = false;
+            this.optionTriggerLabel.TabStop = false;
+            this.optionTrigger.TabStop = false;
+            this.optionEffectLabel.TabStop = false;
+            this.optionEffect.TabStop = false;
+            this.highlightLabel.TabStop = false;
+            this.highlight.TabStop = false;
 
             this.Name = "MainWindow";
             this.Text = "蠢驴风云事件编辑器";
@@ -369,6 +637,8 @@ namespace FoolishDonkeyUniversalis
         private System.Windows.Forms.Button addEventBtn;
         private System.Windows.Forms.Button delNodeBtn;
         private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Button compileBtn;
+        private System.Windows.Forms.Button overviewBtn;
         private System.Windows.Forms.Label namespaceNameLabel;
         private System.Windows.Forms.TextBox namespaceName;
         private System.Windows.Forms.Label eventTitleLabel;
@@ -385,8 +655,27 @@ namespace FoolishDonkeyUniversalis
         private System.Windows.Forms.TextBox eventTrigger;
         private System.Windows.Forms.Label triggeredOnlyLabel;
         private System.Windows.Forms.CheckBox triggeredOnly;
+        private System.Windows.Forms.Label fireOnlyOnceLabel;
+        private System.Windows.Forms.CheckBox fireOnlyOnce;
         private System.Windows.Forms.Label mtthLabel;
         private System.Windows.Forms.TextBox mtth;
+        private System.Windows.Forms.Label eventPictureLabel;
+        private System.Windows.Forms.TextBox eventPicture;
+        private System.Windows.Forms.Label immediateLabel;
+        private System.Windows.Forms.TextBox immediate;
+        private System.Windows.Forms.Label optionLabel;
+        private System.Windows.Forms.Button prevOptionBtn;
+        private System.Windows.Forms.Button nextOptionBtn;
+        private System.Windows.Forms.Button newOptionBtn;
+        private System.Windows.Forms.Button delOptionBtn;
+        private System.Windows.Forms.Label optionNameLabel;
+        private System.Windows.Forms.TextBox optionName;
+        private System.Windows.Forms.Label optionTriggerLabel;
+        private System.Windows.Forms.TextBox optionTrigger;
+        private System.Windows.Forms.Label optionEffectLabel;
+        private System.Windows.Forms.TextBox optionEffect;
+        private System.Windows.Forms.Label highlightLabel;
+        private System.Windows.Forms.CheckBox highlight;
     }
     public partial class MainWindow:Form{
         public MainWindow(){
@@ -511,6 +800,112 @@ namespace FoolishDonkeyUniversalis
             }
             eventsData.namespaces[parentNode.Index].events[selectedNode.Index].trigger = this.eventTrigger.Text;
         }
+        private void ImmediateTextChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].immediate = this.immediate.Text;
+        }
+        private void OptionNameTextChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            int curOptionPtr = eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr;
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options[curOptionPtr].name = this.optionName.Text;
+        }
+        private void HighlightCheckedChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            int curOptionPtr = eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr;
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options[curOptionPtr].highlight = this.highlight.Checked;
+        }
+        private void OptionTriggerTextChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            int curOptionPtr = eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr;
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options[curOptionPtr].trigger = this.optionTrigger.Text;
+        }
+        private void OptionEffectTextChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            int curOptionPtr = eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr;
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options[curOptionPtr].effect = this.optionTrigger.Text;
+        }
+        private void EventPictureTextChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].eventPicture = this.eventPicture.Text;
+        }
         private void EventHiddenCheckedChanged(object sender, EventArgs e)
         {
             TreeNode selectedNode = this.treeView1.SelectedNode;
@@ -530,9 +925,11 @@ namespace FoolishDonkeyUniversalis
             if(this.eventHidden.Checked){
                 this.eventTitle.Enabled = false;
                 this.eventDesc.Enabled = false;
+                this.eventPicture.Enabled = false;
             }else{
                 this.eventTitle.Enabled = true;
                 this.eventDesc.Enabled = true;
+                this.eventPicture.Enabled = true;
             }
         }
         private void TriggeredOnlyCheckedChanged(object sender, EventArgs e)
@@ -553,11 +950,26 @@ namespace FoolishDonkeyUniversalis
             eventsData.namespaces[parentNode.Index].events[selectedNode.Index].triggeredOnly = this.triggeredOnly.Checked;
             if(this.triggeredOnly.Checked){
                 this.mtth.Enabled = false;
-                this.mtth.Enabled = false;
             }else{
                 this.mtth.Enabled = true;
-                this.mtth.Enabled = true;
             }
+        }
+        private void FireOnlyOnceCheckedChanged(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].fireOnlyOnce = this.fireOnlyOnce.Checked;
         }
         private void MtthTextChanged(object sender, EventArgs e)
         {
@@ -596,6 +1008,110 @@ namespace FoolishDonkeyUniversalis
             }else if(this.provinceEvent.Checked){
                 eventsData.namespaces[parentNode.Index].events[selectedNode.Index].eventType = CommonEvent.EventType.province_event;
             }
+        }
+        private void PrevOption(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr --;
+            UpdateVision(eventsData.namespaces[parentNode.Index].events[selectedNode.Index]);
+        }
+        private void NextOption(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr ++;
+            UpdateVision(eventsData.namespaces[parentNode.Index].events[selectedNode.Index]);
+        }
+        private void NewOption(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options.Insert(eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr,new Option());
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr ++;
+            UpdateVision(eventsData.namespaces[parentNode.Index].events[selectedNode.Index]);
+        }
+        private void DelOption(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = this.treeView1.SelectedNode;
+            if (selectedNode == null)
+            {
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            TreeNode parentNode = selectedNode.Parent;
+            if (parentNode == null){
+                MessageBox.Show("请先选中一个事件", "提示信息");
+                return;
+            }
+            else{
+            }
+            if(eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options.Count == 1){
+                MessageBox.Show("请至少保留一个选项", "提示信息");
+                return;
+            }
+            eventsData.namespaces[parentNode.Index].events[selectedNode.Index].options.RemoveAt(eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr);
+            if(eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr != 0)
+                eventsData.namespaces[parentNode.Index].events[selectedNode.Index].curOptionPtr --;
+            UpdateVision(eventsData.namespaces[parentNode.Index].events[selectedNode.Index]);
+        }
+        private void UpdateVision(CommonEvent curEvent){
+            int curOptionPtr = curEvent.curOptionPtr;
+            int optionNum = curEvent.options.Count;
+            if(curOptionPtr == 0){
+                this.prevOptionBtn.Enabled = false;
+            }else{
+                this.prevOptionBtn.Enabled = true;
+            }
+            if(curOptionPtr == optionNum-1){
+                this.nextOptionBtn.Enabled = false;
+            }else{
+                this.nextOptionBtn.Enabled = true;
+            }
+            if(optionNum == 1){
+                this.delOptionBtn.Enabled = false;
+            }else{
+                this.delOptionBtn.Enabled = true;
+            }
+            this.optionLabel.Text = String.Format("选项{0}/共{1}个",curOptionPtr+1,optionNum);
+            Option curOption = curEvent.options[curOptionPtr];
+            this.optionName.Text = curOption.name;
+            this.optionTrigger.Text = curOption.trigger;
+            this.optionEffect.Text = curOption.effect;
+            this.highlight.Checked = curOption.highlight;
         }
         private void FromLoad(object sender, EventArgs e)
         {
@@ -643,9 +1159,143 @@ namespace FoolishDonkeyUniversalis
             bf.Serialize(stream, eventsData);
             stream.Close();
         }
-        private void OnNodeMouseClick(object sender, EventArgs e)
+        private void Compile(object sender, EventArgs e){
+            foreach(Namespace namespaceInfo in eventsData.namespaces){
+                string eventFilePath = Application.StartupPath + eventsData.eventFilePath + "\\" + namespaceInfo.name + ".txt";
+                string locFilePath = Application.StartupPath + eventsData.locFilePath + "\\" + namespaceInfo.name + "_l_english.yml";
+                if (!(Directory.Exists(Application.StartupPath + "\\" + eventsData.eventFilePath)))
+                    Directory.CreateDirectory(Application.StartupPath + "\\" + eventsData.eventFilePath);
+                if (!(Directory.Exists(Application.StartupPath + "\\" + eventsData.locFilePath)))
+                    Directory.CreateDirectory(Application.StartupPath + "\\" + eventsData.locFilePath);
+                // compile event file
+                using (StreamWriter compiler = new StreamWriter(eventFilePath, false, new UTF8Encoding(false))){
+                    compiler.Write(String.Format("namespace = {0}\n",namespaceInfo.name));
+                    int eventNum = namespaceInfo.events.Count;
+                    for(int i=0;i<eventNum;i++){
+                        CommonEvent commonEvent = namespaceInfo.events[i];
+                        if(commonEvent.eventType == CommonEvent.EventType.country_event){
+                            compiler.Write("country_event = {\n");
+                        }else{
+                            compiler.Write("province_event = {\n");
+                        }
+                        compiler.Write(String.Format("\tid = {0}.{1}\n",namespaceInfo.name,i+1));
+                        if(commonEvent.hidden){
+                            compiler.Write("\thidden = yes\n");
+                        }else{
+                            compiler.Write(String.Format("\ttitle = {0}.{1}t\n",namespaceInfo.name,i+1));
+                            compiler.Write(String.Format("\tdesc = {0}.{1}d\n",namespaceInfo.name,i+1));
+                            compiler.Write(String.Format("\tpicture = {0}\n",commonEvent.eventPicture));
+                        }
+                        if(commonEvent.fireOnlyOnce){
+                            compiler.Write("\tfire_only_once = yes\n");
+                        }
+                        if(commonEvent.triggeredOnly){
+                            compiler.Write("\tis_triggered_only = yes\n");
+                        }else{
+                            compiler.Write("\tmean_time_to_happen = {\n");
+                            compiler.Write(String.Format("\t\tmonths = {0}\n",commonEvent.mtth));
+                            compiler.Write("\t}\n");
+                        }
+                        compiler.Write("\ttrigger = {\n");
+                        string[] eventTrigger = commonEvent.trigger.Split('\n');
+                        foreach(string line in eventTrigger){
+                            compiler.Write(String.Format("\t\t{0}\n",line));
+                        }
+                        compiler.Write("\t}\n");
+                        compiler.Write("\timmediate = {\n");
+                        string[] immediate = commonEvent.immediate.Split('\n');
+                        foreach(string line in immediate){
+                            compiler.Write(String.Format("\t\t{0}\n",line));
+                        }
+                        compiler.Write("\t}\n");
+                        int optionNum = commonEvent.options.Count;
+                        for(int j=0;j<optionNum;j++){
+                            compiler.Write("\toption = {\n");
+                            compiler.Write(String.Format("\t\tname = {0}.{1}.{2}\n",namespaceInfo.name,i+1,j+1));
+                            if(commonEvent.options[j].highlight){
+                                compiler.Write("\t\thighlight = yes\n");
+                            }
+                            compiler.Write("\t\ttrigger = {\n");
+                            string[] optionTrigger = commonEvent.options[j].trigger.Split('\n');
+                            foreach(string line in optionTrigger){
+                                compiler.Write(String.Format("\t\t\t{0}\n",line));
+                            }
+                            compiler.Write("\t\t}\n");
+                            string[] optionEffect = commonEvent.options[j].effect.Split('\n');
+                            foreach(string line in optionEffect){
+                                compiler.Write(String.Format("\t\t{0}\n",line));
+                            }
+                            compiler.Write("\t}\n");
+                        }
+                        compiler.Write("}\n");
+                    }
+                    compiler.Close();
+                }
+                // compile loc file
+                using (StreamWriter locCompiler = new StreamWriter(locFilePath, false, new UTF8Encoding(true))){
+                    locCompiler.Write("l_english:\n");
+                    int eventNum = namespaceInfo.events.Count;
+                    for(int i=0;i<eventNum;i++){
+                        CommonEvent commonEvent = namespaceInfo.events[i];
+                        locCompiler.Write(String.Format(" \"{0}.{1}t\":0 \"{2}\"\n",namespaceInfo.name,i+1,commonEvent.title));
+                        locCompiler.Write(String.Format(" \"{0}.{1}d\":0 \"",namespaceInfo.name,i+1));
+                        string[] eventDesc = commonEvent.desc.Split('\n');
+                        foreach(string line in eventDesc){
+                            locCompiler.Write(String.Format("{0}\\n",line));
+                        }
+                        locCompiler.Write("\"\n");
+                        int optionNum = commonEvent.options.Count;
+                        for(int j=0;j<optionNum;j++){
+                            locCompiler.Write(String.Format(" \"{0}.{1}.{2}\":0 \"",namespaceInfo.name,i+1,j+1));
+                            locCompiler.Write(String.Format("{0}",commonEvent.options[j].name));
+                            locCompiler.Write("\"\n");
+                        }
+                    }
+                    locCompiler.Close();
+                }
+                // utf8-bom 2 utf8 again
+                // string locStr;
+                // using (StreamReader sr = new StreamReader(locFilePath, new UTF8Encoding(false))){
+                //     locStr = sr.ReadToEnd();
+                //     sr.Close();
+                // }
+                // Console.Write(locStr);
+                // using (StreamWriter sw = new StreamWriter(locFilePath, false, new UTF8Encoding(true))){
+                //     sw.Write(locStr);
+                //     sw.Close();
+                // }
+            }
+        }
+        private void Overview(object sender, EventArgs e){
+        }
+        private void TreeViewAfterSelect(object sender, EventArgs e)
         {
             TreeNode selectedNode = this.treeView1.SelectedNode;
+            CommonEvent selectedEvent;
+            if(selectedNode.Parent == null){
+                this.namespaceName.Text = selectedNode.Text;
+            }else{
+                selectedEvent = eventsData.namespaces[selectedNode.Parent.Index].events[selectedNode.Index];
+                Console.WriteLine("[MainWindow] TreeViewAfterSelect:selectedEvent.title={0}",selectedEvent.title);
+                this.namespaceName.Text = selectedNode.Parent.Text;
+                this.eventTitle.Text = selectedEvent.title;
+                this.eventDesc.Text = selectedEvent.desc;
+                this.eventHidden.Checked = selectedEvent.hidden;
+                if(selectedEvent.eventType == CommonEvent.EventType.country_event){
+                    this.countryEvent.Checked = true;
+                    this.provinceEvent.Checked = false;
+                }else if(selectedEvent.eventType == CommonEvent.EventType.province_event){
+                    this.countryEvent.Checked = false;
+                    this.provinceEvent.Checked = true;
+                }
+                this.eventTrigger.Text = selectedEvent.trigger;
+                this.triggeredOnly.Checked = selectedEvent.triggeredOnly;
+                this.fireOnlyOnce.Checked = selectedEvent.fireOnlyOnce;
+                this.mtth.Text = selectedEvent.mtth;
+                this.eventPicture.Text = selectedEvent.eventPicture;
+                this.immediate.Text = selectedEvent.immediate;
+                UpdateVision(selectedEvent);
+            }
         }
         private void SaveOrNot(object sender, FormClosingEventArgs e)
         {

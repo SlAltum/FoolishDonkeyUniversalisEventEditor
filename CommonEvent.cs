@@ -5,8 +5,8 @@ namespace FoolishDonkeyUniversalis{
     
     [Serializable]
     public class EventsData {
-        public string eventFilePath = "\\events\\";
-        public string locFilePath = "\\localisation\\";
+        public string eventFilePath = "\\events";
+        public string locFilePath = "\\localisation";
         public List<Namespace> namespaces = new List<Namespace>{new Namespace()};
     }
     [Serializable]
@@ -29,7 +29,7 @@ namespace FoolishDonkeyUniversalis{
         public string title = "新事件";
         public string desc = "这是事件描述";
         public string eventPicture = "";
-        public EventType eventType;
+        public EventType eventType = EventType.country_event;
         public bool triggeredOnly = true;
         public string mtth = "";
         public bool fireOnlyOnce = false;
@@ -37,6 +37,7 @@ namespace FoolishDonkeyUniversalis{
         public string trigger = "";
         public string immediate = "";
         public List<Option> options = new List<Option>{new Option()};
+        public int curOptionPtr = 0;
     }
     [Serializable]
     public class Option {

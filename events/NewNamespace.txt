@@ -1,0 +1,21 @@
+namespace = NewNamespace
+country_event = {
+	id = NewNamespace.1
+	title = NewNamespace.1t
+	desc = NewNamespace.1d
+	picture = 
+	is_triggered_only = yes
+	trigger = {
+		
+	}
+	immediate = {
+		
+	}
+	option = {
+		name = NewNamespace.1.1
+		trigger = {
+			
+		}
+		
+	}
+}
