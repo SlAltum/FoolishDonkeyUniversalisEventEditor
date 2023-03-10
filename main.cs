@@ -1237,8 +1237,8 @@ namespace FoolishDonkeyUniversalis
                     int eventNum = namespaceInfo.events.Count;
                     for(int i=0;i<eventNum;i++){
                         CommonEvent commonEvent = namespaceInfo.events[i];
-                        locCompiler.Write(String.Format(" \"{0}.{1}t\":0 \"{2}\"\n",namespaceInfo.name,i+1,commonEvent.title));
-                        locCompiler.Write(String.Format(" \"{0}.{1}d\":0 \"",namespaceInfo.name,i+1));
+                        locCompiler.Write(String.Format(" {0}.{1}t:0 \"{2}\"\n",namespaceInfo.name,i+1,commonEvent.title));
+                        locCompiler.Write(String.Format(" {0}.{1}d:0 \"",namespaceInfo.name,i+1));
                         string[] eventDesc = commonEvent.desc.Split('\n');
                         foreach(string line in eventDesc){
                             locCompiler.Write(String.Format("{0}\\n",line));
@@ -1246,7 +1246,7 @@ namespace FoolishDonkeyUniversalis
                         locCompiler.Write("\"\n");
                         int optionNum = commonEvent.options.Count;
                         for(int j=0;j<optionNum;j++){
-                            locCompiler.Write(String.Format(" \"{0}.{1}.{2}\":0 \"",namespaceInfo.name,i+1,j+1));
+                            locCompiler.Write(String.Format(" {0}.{1}.{2}:0 \"",namespaceInfo.name,i+1,j+1));
                             locCompiler.Write(String.Format("{0}",commonEvent.options[j].name));
                             locCompiler.Write("\"\n");
                         }
